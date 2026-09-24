@@ -1,7 +1,7 @@
 import hashlib
 import secrets
 
-# RC4 stream cipher
+
 def rc4_crypt(key: bytes, data: bytes) -> bytes:
     if not key:
         raise ValueError("RC4 key must not be empty")
@@ -25,17 +25,20 @@ def rc4_crypt(key: bytes, data: bytes) -> bytes:
         out[idx] = byte ^ ks_byte
     return bytes(out)
 
-# Hashing
+
 def sha1(data: bytes) -> bytes:
+    """Return the raw (binary) 20-byte SHA-1 digest of data."""
     return hashlib.sha1(data).digest()
 
 
 def sha1_hex(data: bytes) -> str:
+    """Return the hex-encoded SHA-1 digest of data."""
     return hashlib.sha1(data).hexdigest()
 FIELD_SEP = "|"
 
 
 def encode_fields(*fields) -> bytes:
+    """Join fields with '|' and utf-8 encode, e.g. encode_fields(p, g, A)."""
     return FIELD_SEP.join(str(f) for f in fields).encode("utf-8")
 
 
@@ -43,7 +46,9 @@ def decode_fields(data: bytes):
     """Inverse of encode_fields(); returns a list of strings."""
     return data.decode("utf-8").split(FIELD_SEP)
 
+
 def is_probable_prime(n: int, rounds: int = 20) -> bool:
+    """Miller-Rabin probabilistic primality test."""
     if n < 2:
         return False
     small_primes = (2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37)
