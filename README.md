@@ -1,4 +1,4 @@
-# Network-Security-Lab-
+# Network-Security-Lab
 Secure UDP Channel with password-based key exchange 
 
 Secure UDP Communication Channel (Password-Authenticated Diffie-Hellman + RC4)
